@@ -44,6 +44,7 @@ public class TupleTest {
         Tuple<Integer> t0 = new Tuple<>();
         Tuple<Integer> t1 = new Tuple<>(19);
         Tuple<Integer> t2 = new Tuple<>(19);
+        Tuple<Integer> t8 = new Tuple<>(19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19);
         Integer t3 = 19;
         Tuple<Integer> t4 = new Tuple<>();
         Tuple<Long> t5 = new Tuple<>(19L);
@@ -66,6 +67,7 @@ public class TupleTest {
         Assert.assertTrue(t6.equals(t0));
         Assert.assertTrue(t6.equals(t7));
         Assert.assertEquals(t6.hashCode(), t7.hashCode());
+        Assert.assertNotEquals(t1.hashCode(), t8.hashCode());
     }
     @Test
     public void testComparison() {

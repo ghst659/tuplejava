@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Tuple<E extends Comparable<E>>
     implements Iterable<E>, Comparable<Tuple<E>> {
-    private static final int[] SEEDS = {7, 11, 13, 17, 19, 23, 29, 31, 37};
+    private static final int[] SEEDS = {11, 13, 17, 19, 23, 29, 31, 37};
     private List<E> a = null;
 
     /**
-     * Primary constructor, including constructor with no args.
+     * Primary constructor, including creation without args.
      * @param k varargs of Strings to form the tuple
      */
     @SafeVarargs
@@ -52,7 +52,6 @@ public class Tuple<E extends Comparable<E>>
         }
         return result;
     }
-
     /**
      * Compares this element to Tuple b.
      * @param b the Tuple against which this is compared.
@@ -79,9 +78,6 @@ public class Tuple<E extends Comparable<E>>
         }
         return 0;
     }
-    /**
-     * override of equals to do string equal comparison.
-     */
     @Override
     public boolean equals(Object oy) {
         boolean equality = (this == oy); // object ref equality means we are done
@@ -95,9 +91,6 @@ public class Tuple<E extends Comparable<E>>
         }
         return equality;
     }
-    /**
-     * override of hashCode to enable use as Map or Set key.
-     */
     @Override
     public int hashCode() {
         int i = 0;
@@ -108,9 +101,6 @@ public class Tuple<E extends Comparable<E>>
         }
         return result;
     }
-    /**
-     * Produces (a,b,c) without quotes
-     */
     @Override
     public String toString() {
         StringBuilder rbuf = new StringBuilder("(");
@@ -132,9 +122,6 @@ public class Tuple<E extends Comparable<E>>
     public List<E> toList() {
         return new ArrayList<>(this.a);
     }
-    /**
-     * Implements iteration over tuple elements.
-     */
     @Override
     public Iterator<E> iterator() {
         return this.a.iterator();
