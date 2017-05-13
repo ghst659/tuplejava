@@ -57,12 +57,15 @@ public class TupleTest {
         Assert.assertTrue(t1.equals(t2));
         Assert.assertTrue(t1.equals(t1));
         Assert.assertTrue(t0.equals(t4));
+        Assert.assertEquals(t0.hashCode(), t4.hashCode());
         Assert.assertFalse(t0.equals(null));
         Assert.assertFalse(t1.equals(t5));
         Assert.assertFalse(t5.equals(t1));
         Assert.assertTrue(t0.equals(t6));
+        Assert.assertEquals(t0.hashCode(), t6.hashCode());
         Assert.assertTrue(t6.equals(t0));
         Assert.assertTrue(t6.equals(t7));
+        Assert.assertEquals(t6.hashCode(), t7.hashCode());
     }
     @Test
     public void testComparison() {
@@ -135,15 +138,15 @@ public class TupleTest {
     }
     @Test
     public void testToList() {
-        List<Tuple<Integer>> t = new LinkedList<>();
-        t.add(new Tuple<>());
-        t.add(new Tuple<>(19));
-        t.add(new Tuple<>(23, 29));
-        for (int i = 0; i < t.size(); ++i) {
-            List<Integer> a = t.get(i).toList();
-            Assert.assertEquals(t.get(i).size(), a.size());
-            for (int j = 0; j < t.get(i).size(); ++j) {
-                Assert.assertEquals(t.get(i).get(j), a.get(j));
+        List<Tuple<Integer>> tc = new LinkedList<>();
+        tc.add(new Tuple<>());
+        tc.add(new Tuple<>(19));
+        tc.add(new Tuple<>(23, 29));
+        for (Tuple<Integer> t: tc) {
+            List<Integer> a = t.toList();
+            Assert.assertEquals(t.size(), a.size());
+            for (int j = 0; j < t.size(); ++j) {
+                Assert.assertEquals(t.get(j), a.get(j));
             }
         }
     }

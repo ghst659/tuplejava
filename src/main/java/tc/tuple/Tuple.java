@@ -1,13 +1,14 @@
 package tc.tuple;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 
 public class Tuple<E extends Comparable<E>>
     implements Iterable<E>, Comparable<Tuple<E>> {
-
+    private static final int[] SEEDS = {7, 11, 13, 17, 19, 23, 29, 31, 37};
     private List<E> a = null;
 
     /**
@@ -18,9 +19,7 @@ public class Tuple<E extends Comparable<E>>
     public Tuple(E...k) {
         if (k != null) {
             this.a = new ArrayList<>(k.length);
-            for (E x: k) {
-                this.a.add(x);
-            }
+            this.a.addAll(Arrays.asList(k));
         }
     }
     /**
@@ -39,11 +38,7 @@ public class Tuple<E extends Comparable<E>>
      * @return number of elements, or zero if no data in tuple
      */
     public int size() {
-        int result = 0;
-        if (this.a != null) {
-            result = this.a.size();
-        }
-        return result;
+        return this.a.size();
     }
     /**
      * Get element i of the tuple
@@ -52,7 +47,7 @@ public class Tuple<E extends Comparable<E>>
      */
     public E get(int i) {
         E result = null;
-        if (this.a != null && i >= 0 && i < this.a.size()) {
+        if (i >= 0 && i < this.a.size()) {
             result = this.a.get(i);
         }
         return result;
@@ -105,11 +100,11 @@ public class Tuple<E extends Comparable<E>>
      */
     @Override
     public int hashCode() {
-        int result = 19;
-        if (this.a != null) {
-            for (E elem : this.a) {
-                result = ((result * 29) + elem.hashCode());
-            }
+        int i = 0;
+        int result = SEEDS[i];
+        for (E elem : this.a) {
+            i = (i + 1) % SEEDS.length;
+            result = ((result * SEEDS[i]) + elem.hashCode());
         }
         return result;
     }
@@ -118,7 +113,7 @@ public class Tuple<E extends Comparable<E>>
      */
     @Override
     public String toString() {
-        StringBuffer rbuf = new StringBuffer("(");
+        StringBuilder rbuf = new StringBuilder("(");
         boolean first = true;
         for (E elem : this.a) {
             if (! first) {
@@ -128,8 +123,7 @@ public class Tuple<E extends Comparable<E>>
             first = false;
         }
         rbuf.append(")");
-        String result = rbuf.toString();
-        return result;
+        return rbuf.toString();
     }
     /**
      * Convert tuple to a list
