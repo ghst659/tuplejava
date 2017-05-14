@@ -46,11 +46,12 @@ public class Tuple<E extends Comparable<E>>
      * @return element i of the tuple, or null if nonexistent
      */
     public E get(int i) {
-        E result = null;
         if (i >= 0 && i < this.a.size()) {
-            result = this.a.get(i);
+            return this.a.get(i);
+        } else {
+            String msg = String.format("Index: %d, Size: %d", i, this.a.size());
+            throw new IndexOutOfBoundsException(msg);
         }
-        return result;
     }
     /**
      * Compares this element to Tuple b.

@@ -40,6 +40,27 @@ public class TupleTest {
         }
     }
     @Test
+    public void testGetValidIndex() {
+        Tuple<String> t = new Tuple<>("foo", "bar");
+        Assert.assertEquals("foo", t.get(0));
+        Assert.assertEquals("bar", t.get(1));
+    }
+    @Test(expected=IndexOutOfBoundsException.class)
+    public void testGetNegativeIndex() {
+        Tuple<String> t = new Tuple<>("mumble");
+        String unused = t.get(-1);
+    }
+    @Test
+    public void testGetLargeIndex() {
+        Tuple<String> t = new Tuple<>("bletch");
+        try {
+            String unused = t.get(10);
+            Assert.fail("Exception was not thrown");
+        } catch (IndexOutOfBoundsException e) {
+            Assert.assertEquals(e.getMessage(), "Index: 10, Size: 1");
+        }
+    }
+    @Test
     public void testEquals() {
         Tuple<Integer> t0 = new Tuple<>();
         Tuple<Integer> t1 = new Tuple<>(19);
